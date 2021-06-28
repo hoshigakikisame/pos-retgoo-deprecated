@@ -1,0 +1,4 @@
+{
+    "ENABLE_FLUTTER_DESKTOP": true,
+    "go.formatTool": "goimports",
+}

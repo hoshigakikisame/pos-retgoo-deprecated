@@ -1,0 +1,298 @@
+@url = http://pos.dev.retgoo.id/api/pg/
+@urltes = http://192.168.1.1:19001/api/pg/
+@token = e33c9c7c5e5726c4f9a7f7c5f3e2654e
+
+@urlSementara = http://192.168.1.20:9292/api/pg/
+
+###
+
+POST {{urlSementara}}pos.user_auth HTTP/1.1
+
+{
+    "username" : "gunt",
+    "password" : "123456"
+}
+
+###
+
+POST {{urltes}}pos.user_auth HTTP/1.1
+
+{
+    "username" : "tester_pos",
+    "password" : "123456"
+}
+
+###
+
+GET {{urltes}}pos.get_profile HTTP/1.1
+Authorization: {{token}}
+
+###
+
+GET {{url}}pos.get_stores HTTP/1.1
+Authorization: {{token}}
+
+###
+
+POST {{urltes}}pos.get_cash_drawers HTTP/1.1
+Authorization: {{token}}
+
+###
+
+
+POST {{urltes}}pos.find_product HTTP/1.1
+
+{
+    "keyword" : "",
+    "is_keyword_all" : false,
+    "category_id" : null,
+    "brand_id" : null
+}
+
+
+###
+
+POST {{url}}/pos.get_waiting_carts HTTP/1.1
+Authorization: {{token}}
+
+{
+    "shift_id" : "MLG-01-190717-00000002"
+}
+
+###
+
+POST {{urltes}}pos.list_sales_transaction_by_shift HTTP/1.1
+Authorization: {{token}}
+
+{
+    "keyword" : "",
+    "shift_id": "TK-AST-191129-00000001"
+}
+
+###
+
+POST http://192.168.1.2:8081/user/all/paging HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+?sn=61627018290005
+
+
+
+###
+
+POST {{urltes}}pos.find_referral HTTP/1.1
+
+{
+    "keyword": " "
+}
+
+
+###
+
+POST {{urltes}}pos.find_customer HTTP/1.1
+
+{
+    "keyword": " "
+}
+
+###
+
+GET {{urltes}}pos.get_template_pos HTTP/1.1
+
+###
+
+POST {{urltes}}pos.get_waiting_carts HTTP/1.1
+
+{
+    "shift_id": "RG-01-190816-00000002"
+}
+
+###
+
+POST {{urltes}}pos.set_customer HTTP/1.1
+
+{
+    "sales_transaction_id": "RG-01-190829-00000075",
+    "customer_id": "MLG-01- -00023544",
+    "customer_code": "331490849",
+    "customer_name": "EBENG"
+}
+
+###
+
+POST {{urltes}}pos.get_detail_carts HTTP/1.1
+
+{
+    "sales_transaction_id": "RG-01-190829-00000075"
+}
+
+
+###
+
+POST {{urltes}}print.get_print HTTP/1.1
+
+{
+    "sales_trx_id": "RG-01-190828-00000072",
+    "print_width": 32
+}
+
+###
+
+POST {{urltes}}print.get_print_close_shift HTTP/1.1
+
+{
+    "close_shift_id": "RG-01-190814-00000002",
+    "print_width" : 32
+}
+
+###
+
+POST {{urltes}}pos.checkout_cart HTTP/1.1
+
+{
+    "sales_transaction_id": "RG-01-190829-00000030",
+}
+
+###
+
+POST {{urltes}}pos.get_last_closing_balance HTTP/1.1
+
+{
+    "cash_drawer_id": "DEV-003-190704-00000001"
+}
+
+###
+
+POST {{urltes}}pos.open_shift HTTP/1.1
+
+{
+    "cash_drawer_id": "DEV-003-190704-00000001",
+    "last_closing_balance": 0,
+    "opening_balance": "10.000.0"
+}
+
+###
+
+POST {{urltes}}pos.close_shift HTTP/1.1
+
+{
+    "shift_id": "RG-01-190918-00000001",
+    "sales_amount": 375000.0,
+    "amount_cash": 385000.0,
+    "amount_non_cash": 0.0,
+    "deposit_amount": 0.0,
+    "closing_balance": 0.0,
+    "general_expense": 0.0
+}
+
+###
+
+GET {{urltes}}pos.get_store_information HTTP/1.1
+
+###
+
+POST http://192.168.2.101:19001/api/pg/pusat/pos.validate_voucher HTTP/1.1
+
+{
+    "voucher_code": "JDZLVEZWR6"
+}
+
+###
+
+POST {{urltes}}pusat/pos.validate_voucher HTTP/1.1
+
+{
+    "voucher_code": "YE6E1S16JP"
+}
+
+###
+POST {{urltes}}pusat/pos.update_is_used_voucher HTTP/1.1
+
+{
+    "customer_name": "EARLY",
+    "vouchers": [
+        {"voucher_code": "JDZLVEZWR"}]
+}
+
+###
+GET http://192.168.1.105:19001/api/pg/pos.get_current_promo HTTP/1.1
+
+###
+
+POST {{urltes}}pos.get_waiting_carts HTTP/1.1
+Authorization: {{token}}
+
+{
+    "shift_id": "AST01-191030-00000001"
+}
+
+###
+
+POST {{urltes}}pos.set_promo_procedure HTTP/1.1
+
+{
+	"sales_transaction_id": "TK - AST - 191111 - 00000012",
+	"member_id": "DEV - 003 - 190702 - 00000002",
+	"applies_promo": [{
+		"benefit": 2,
+		"is_procedure": true,
+		"promo_id": "RG - 01 - 190916 - 00000002"
+	}, {
+		"benefit": 1,
+		"is_procedure": true,
+		"promo_id": "RG - 01 - 190925 - 00000002"
+	}],
+	"applies_promo_procedure": [{
+		"promo_id": "RG - 01 - 190916 - 00000002",
+		"promo_code": null,
+		"promo_name": "Promo Wardah 35 %",
+		"valid_date": "2019 - 11 - 30 T00: 00: 00 + 07: 00",
+		"procedure": "Dengan membawa syarat baju"
+	}, {
+		"promo_id": "RG - 01 - 190925 - 00000002",
+		"promo_code": "PRM - 19090013",
+		"promo_name": "Promo NYX 250.000",
+		"valid_date": "2019 - 11 - 30 T00: 00: 00 + 07: 00",
+		"procedure": "Dengan membawa syarat Nota Sebelumnya"
+	}, {}]
+}
+
+###
+
+POST {{urltes}}pos.set_promo_benefit_disc_product HTTP/1.1
+
+{
+    "sales_transaction_id": "AST01-191031-00000012",
+    "promo_id": "RG-01-190916-00000002",
+    "member_id": "DEV-003-190702-00000002"
+}
+
+###
+
+POST {{urltes}}pos.get_free_product HTTP/1.1
+
+{
+    "promo_id": "RG-01-190925-00000002",
+    "member_id": "DEV-003-190702-00000002"
+}
+
+###
+
+POST {{urltes}}pos.set_promo_benefit_free_product HTTP/1.1
+
+{
+    "sales_transaction_id": "TK-AST-191105-00000008",
+    "promo_id": "RG-01-190925-00000002",
+    "free_products": [{"ret_product_code":"KABAEAS07","ret_product_id":"MLG-01-190320-00000021","ret_product_name":"AEAS07 DULCE BROWN ABSOLUTE","ret_product_qrcode":"888432912470","ret_qty":1,"ret_qty_convert":1,"ret_qty_uom":1,"ret_unit_price":0,"ret_uom_id":"MLG-01-190320-00000006","ret_uom_product_id":"MLG-01-190320-00000006"}]
+}
+
+###
+
+POST {{urltes}}pos.submit_cart HTTP/1.1
+
+{
+    "sales_transaction_id": "TK-AST-191108-00000001",
+    "payment_amount_cash": 12.0,
+    "donation_amount": 12.0,
+    "change_amount": 0.0
+}
